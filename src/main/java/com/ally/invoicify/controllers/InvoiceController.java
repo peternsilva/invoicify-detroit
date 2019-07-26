@@ -67,6 +67,7 @@ public class InvoiceController {
 		invoice.setCompany(companyRepository.findOne(clientId));
 		invoice.setPaidOn(null);
 		invoice.setInitialBalance(initialInvoiceBalance);
+		invoice.setCurrentBalance(initialInvoiceBalance);
 		
 		return invoiceRepository.save(invoice);
 	}
@@ -91,6 +92,8 @@ public class InvoiceController {
 		newInvoice.setCreatedBy(alreadyExistingInvoice.getCreatedBy());
 		newInvoice.setCreatedOn(now);
 		newInvoice.setCompany(alreadyExistingInvoice.getCompany());
+		newInvoice.setInitialBalance(alreadyExistingInvoice.getInitialBalance());
+		newInvoice.setCurrentBalance(alreadyExistingInvoice.getInitialBalance());
 		
 		Invoice savedInvoice = invoiceRepository.save(newInvoice);	
 
