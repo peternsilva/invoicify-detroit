@@ -33,7 +33,9 @@ public class Invoice {
 
 	private Date paidOn;
 
-	private double balance;
+	private double initialBalance;
+
+	private double currentBalance;
 	
 	@JsonManagedReference(value="secondParent")
 	@OneToMany(mappedBy="invoice", cascade=CascadeType.ALL)
@@ -95,12 +97,20 @@ public class Invoice {
 		this.paidOn = paidOn;
 	} 
 
-	public double getBalance(){
-		return balance;
+	public double getInitialBalance(){
+		return initialBalance;
 	}
 
-	public void setBalance(double balance){
-		this.balance = balance;
+	public void setInitialBalance(double initialBalance){
+		this.initialBalance = initialBalance;
+	}
+
+	public double getCurrentBalance(){
+		return currentBalance;
+	}
+
+	public void setCurrentBalance(double currentBalance){
+		this.currentBalance = currentBalance;
 	}
 	
 }

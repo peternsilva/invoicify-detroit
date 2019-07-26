@@ -48,7 +48,7 @@ public class InvoiceController {
 		Date now = new Date(nowish);
 		Invoice invoice = new Invoice();
 		invoice.setInvoiceDescription(invoiceView.getInvoiceDescription());
-		double total = 0;
+		double initialInvoiceBalance = 0;
 		
 		List<InvoiceLineItem> items = new ArrayList<InvoiceLineItem>();
 		for (BillingRecord record : records) {
@@ -58,7 +58,7 @@ public class InvoiceController {
 			lineItem.setCreatedOn(now);
 			lineItem.setInvoice(invoice);
 			items.add(lineItem);
-			total += record.getTotal();
+			initialInvoiceBalance += record.getTotal();
 		}
 		
 		invoice.setLineItems(items);
@@ -66,7 +66,7 @@ public class InvoiceController {
 		invoice.setCreatedOn(now);
 		invoice.setCompany(companyRepository.findOne(clientId));
 		invoice.setPaidOn(null);
-		invoice.setBalance(total);
+		invoice.setInitialBalance(initialInvoiceBalance);
 		
 		return invoiceRepository.save(invoice);
 	}
