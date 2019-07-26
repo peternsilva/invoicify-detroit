@@ -42,17 +42,9 @@ public class NewPaymentController {
 	public void create(@RequestBody NewPayment newPayment,  @PathVariable Long invoiceId){
 		Invoice invoice = invoiceRepo.getOne(invoiceId);
 
-		// // invoice.setBalance(invoice.getBalance()- newPayment.getAmount());
+	    invoice.setCurrentBalance(invoice.getCurrentBalance() - newPayment.getAmount());
 		newPayment.setInvoice(invoice);
 
-
-
-
-
 		newPaymentRepo.save(newPayment);
-
 	}
-
-
-	
 }
