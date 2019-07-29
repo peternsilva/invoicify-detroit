@@ -37,10 +37,10 @@ public class NewPaymentController {
 	}
 	
 	@PostMapping("{invoiceId}")
-	public NewPayment create(@RequestBody NewPayment newPayment){
+	public NewPayment create(@RequestBody NewPayment newPayment, @PathVariable Long invoiceId){
 		long nowish = Calendar.getInstance().getTimeInMillis();
 		Date now = new Date(nowish);
-		Invoice invoice = invoiceRepo.getOne(newPayment.getInvoiceId());
+		Invoice invoice = invoiceRepo.getOne(invoiceId);
 
 	    invoice.setCurrentBalance(invoice.getCurrentBalance() - newPayment.getAmount());
   if(invoice.getCurrentBalance() <= 0) {
