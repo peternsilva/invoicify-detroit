@@ -37,19 +37,17 @@ public class NewPaymentController {
 	}
 	
 	@PostMapping("{invoiceId}")
-	public void create(@RequestBody NewPayment newPayment,  @PathVariable Long invoiceId){
+	public NewPayment create(@RequestBody NewPayment newPayment){
 		long nowish = Calendar.getInstance().getTimeInMillis();
-        Date now = new Date(nowish);
-		Invoice invoice = invoiceRepo.getOne(invoiceId);
-
+		Date now = new Date(nowish);
+		Invoice invoice = invoiceRepo.getOne(newPayment.getInvoiceId());
 
 	    invoice.setCurrentBalance(invoice.getCurrentBalance() - newPayment.getAmount());
   if(invoice.getCurrentBalance() <= 0) {
 			invoice.setPaidOn(now);
 		}
-		newPayment.setInvoice(invoice);
 
-		newPaymentRepo.save(newPayment);
+		return newPaymentRepo.save(newPayment);
 	}
 
 }

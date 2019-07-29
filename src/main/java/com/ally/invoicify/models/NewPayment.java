@@ -4,7 +4,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
 
 @Entity
 // @Bean
@@ -18,17 +17,16 @@ public class NewPayment {
 
 	private String method;
 
-	@ManyToOne
-	private Invoice invoice;
+	private Long invoiceId;
 
 	public NewPayment() {
 	}
 
-	public NewPayment(Long amount, String method, Invoice invoice) {
+	public NewPayment(Long amount, String method, Long invoiceId) {
 		this();
 		this.amount = amount;
 		this.method = method;
-		this.invoice = invoice;
+		this.invoiceId = invoiceId;
 	}
 
 	public Long getId() {
@@ -54,12 +52,12 @@ public class NewPayment {
 		this.method = method;
 	}
 
-	public Invoice getInvoice() {
-		return this.invoice;
+	public Long getInvoiceId() {
+		return this.invoiceId;
 	}
 
-	public void setInvoice(Invoice invoice) {
-		this.invoice = invoice;
+	public void setInvoiceId(Long invoiceId) {
+		this.invoiceId = invoiceId;
 	}
 
 }
