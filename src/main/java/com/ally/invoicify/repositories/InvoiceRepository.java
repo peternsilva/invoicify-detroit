@@ -29,7 +29,7 @@ public interface InvoiceRepository extends JpaRepository<Invoice, Long> {
     List<Invoice> findSumInitalBalance();
 
 
-    @Query("select sum(abs(initialBalance-currentBalance)) from Invoice i where paidOn = null")
+    @Query("select sum(currentBalance) from Invoice i where paidOn = null")
     List<Invoice> findTotalOutstandingAmount();
 
     @Query("select count(id) from Invoice i WHERE paidOn = null")
