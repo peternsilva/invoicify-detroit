@@ -106,6 +106,10 @@ public class InvoiceController {
 	public List<Invoice> list() {
 		return invoiceRepository.findAll();
 	}
+	// @GetMapping("/avg")
+	// public  List<Invoice> test() {
+	// 	return invoiceRepository.findAverageCurrentBalanceByCompany();
+	// }
   
 	@GetMapping("/paid")
 	public  List<Invoice> findPaid() {

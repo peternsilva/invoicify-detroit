@@ -8,9 +8,9 @@ public class Data {
 
     private double avergeInvoiceAmount;
 
-    private List<Invoice> averageCurrentBalanceByCompany;
+    private Double averageCurrentBalanceByCompany;
 
-    private List<Invoice> findAverageTimeToPay;
+    private Double findAverageTimeToPay;
 
     private List<Invoice> findSumInitalBalance;
 
@@ -80,19 +80,19 @@ public class Data {
         this.findSumInitalBalance = findSumInitalBalance;
     }
 
-    public List<Invoice> getFindAverageTimeToPay() {
+    public Double getFindAverageTimeToPay() {
         return findAverageTimeToPay;
     }
 
-    public void setFindAverageTimeToPay(List<Invoice> findAverageTimeToPay) {
+    public void setFindAverageTimeToPay(Double findAverageTimeToPay) {
         this.findAverageTimeToPay = findAverageTimeToPay;
     }
 
-    public List<Invoice> getAverageCurrentBalanceByCompany() {
+    public Double getAverageCurrentBalanceByCompany() {
         return averageCurrentBalanceByCompany;
     }
 
-    public void setAverageCurrentBalanceByCompany(List<Invoice> averageCurrentBalanceByCompany) {
+    public void setAverageCurrentBalanceByCompany(Double averageCurrentBalanceByCompany) {
         this.averageCurrentBalanceByCompany = averageCurrentBalanceByCompany;
     }
 	

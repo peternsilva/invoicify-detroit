@@ -59,14 +59,14 @@ public class SeedData {
             
 
 			invoiceSeed(invoiceLineItemRepository, invoiceRepository, admin, ajax, billingRecord, invoice, desc, currBal,
-					initialBal, nowish);
+					initialBal, nowish, newPaymentRepository);
         }
        
 }
 
 	private void invoiceSeed(InvoiceLineItemRepository invoiceLineItemRepository, InvoiceRepository invoiceRepository,
 			User admin, Company ajax, BillingRecord billingRecord, Invoice invoice, String desc, double currBal,
-			double initialBal, long nowish) {
+			double initialBal, long nowish, NewPaymentRepository newPaymentRepository) {
 
 		invoice.setCreatedBy(admin);
         invoice.setInvoiceDescription(desc);
@@ -91,5 +91,14 @@ public class SeedData {
 			invoice.setPaidOn(paid);
 		}
         invoiceRepository.save(invoice);
+
+
+        NewPayment test = newPaymentRepository.save(new NewPayment(1.0,"Cash",invoice.getId()));
+        
+        NewPayment test1 = newPaymentRepository.save(new NewPayment(1.0,"Credit",invoice.getId()));
+        
+        NewPayment test2 = newPaymentRepository.save(new NewPayment(1.0,"Venmmo",invoice.getId()));
+        
+
 	}
 }

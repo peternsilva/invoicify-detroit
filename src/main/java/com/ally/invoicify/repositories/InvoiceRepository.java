@@ -18,24 +18,24 @@ public interface InvoiceRepository extends JpaRepository<Invoice, Long> {
     @Query("select avg(initialBalance) from Invoice i")
     double findAverageInvoiceAmount();
 
-    @Query("select avg(currentBalance), company.id from Invoice i group by company")
-    List<Invoice> findAverageCurrentBalanceByCompany();
+    @Query("select sum(currentBalance) / count(company.id) from Invoice i where paidOn = null")
+    Double findAverageCurrentBalanceByCompany();
 
 
-    @Query("select paidOn - createdOn, invoiceDescription from Invoice i where paidOn != null")
-    List<Invoice> findAverageTimeToPay();
+    @Query("select avg(paidOn - createdOn) from Invoice i where paidOn != null")
+    Double findAverageTimeToPay();
 
-    @Query("select sum(initialBalance) from Invoice i")
+    @Query("select sum(initialBalance) from Invoice i where paidOn != null")
     List<Invoice> findSumInitalBalance();
 
 
-    @Query("select sum(abs(currentBalance-initialBalance)) from Invoice i")
+    @Query("select sum(abs(initialBalance-currentBalance)) from Invoice i where paidOn = null")
     List<Invoice> findTotalOutstandingAmount();
 
-    @Query("select count(id) from Invoice i WHERE currentBalance > 0")
+    @Query("select count(id) from Invoice i WHERE paidOn = null")
     List<Invoice> findTotalOutstandingInvoices();
 
-    @Query("select count(id) from Invoice i WHERE currentBalance <= 0")
+    @Query("select count(id) from Invoice i WHERE paidOn != null")
     List<Invoice> findTotalPaidInvoices();
 
     
