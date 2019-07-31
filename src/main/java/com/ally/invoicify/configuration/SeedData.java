@@ -57,16 +57,30 @@ public class SeedData {
 			System.out.println("ms value ===>"+ms);
             long nowish = ms;
             
+            if(i%2 ==0){
+                System.out.println(i);
+            invoiceSeed(invoiceLineItemRepository, invoiceRepository, admin, ajax, billingRecord, invoice, desc, currBal,
+                    initialBal, nowish, newPaymentRepository);
+            }
+            else{  
 
-			invoiceSeed(invoiceLineItemRepository, invoiceRepository, admin, ajax, billingRecord, invoice, desc, currBal,
-					initialBal, nowish, newPaymentRepository);
+
+			invoiceSeed(invoiceLineItemRepository, invoiceRepository, admin, lomax, billingRecord, invoice, desc, currBal,
+                    initialBal, nowish, newPaymentRepository);
+            } 
+                    
         }
        
 }
 
 	private void invoiceSeed(InvoiceLineItemRepository invoiceLineItemRepository, InvoiceRepository invoiceRepository,
-			User admin, Company ajax, BillingRecord billingRecord, Invoice invoice, String desc, double currBal,
+			User admin, Company company, BillingRecord billingRecord, Invoice invoice, String desc, double currBal,
 			double initialBal, long nowish, NewPaymentRepository newPaymentRepository) {
+        
+         
+
+
+
 
 		invoice.setCreatedBy(admin);
         invoice.setInvoiceDescription(desc);
@@ -83,7 +97,7 @@ public class SeedData {
         InvoiceLineItem temp = invoiceLineItemRepository.save(lineItem);
         lineItems.add(temp);
         invoice.setLineItems(lineItems);
-        invoice.setCompany(ajax);
+        invoice.setCompany(company);
         invoice.setCreatedOn(now);
         invoice.setCurrentBalance(currBal);
 		invoice.setInitialBalance(initialBal);
